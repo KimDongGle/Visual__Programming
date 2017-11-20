@@ -1,0 +1,88 @@
+package chapter07_problems;
+import java.util.*;
+
+import org.w3c.dom.NamedNodeMap;
+
+
+class Student {
+	//저장할 데이터 4개 변수 선언
+	String name;
+	String major;
+	String IDcode;
+	double credit;
+	
+	public Student(String name2, String major2, String iDcode2, double grade) {
+		// TODO Auto-generated constructor stub
+	}
+	//생성자
+	public void Student(String name, String major, String ID, double credit) {
+		this.name = name;
+		this.major = major;
+		this.IDcode = ID;
+		this.credit = credit;
+	}	
+	//set메소드 모음
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public void setId(String IDcode) {
+		this.IDcode = IDcode;
+	}
+	public void setCredit(double credit) {
+		this.credit = credit;
+	}	
+	//get메소드 모음
+	public String getName() {
+		return name;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public String getIDCode() {
+		return IDcode;
+	}
+	public double getCredit() {
+		return credit;
+	}	
+}
+
+public class Problem05 {
+	Scanner scanner = new Scanner(System.in);
+	ArrayList<Student> studentList = new ArrayList<Student>();
+	
+	public void firstSet() {
+		System.out.println("학생 이름, 학과, 학번, 학점평균을 입력하세요.");
+		for(int i = 0; i < 4; i++) {
+			System.out.print(">> ");
+			String input = scanner.nextLine();
+			StringTokenizer filter = new StringTokenizer(input, ",");
+			String name = filter.nextToken().trim();
+			String major = filter.nextToken().trim();
+			String IDcode = filter.nextToken().trim();			
+			double grade = Double.parseDouble(filter.nextToken().trim());
+			
+			Student student = new Student(name, major, IDcode, grade);
+			studentList.add(student);
+		}
+	}
+	
+	public void printStudent() {
+		for(int i = 0; i < 4; i++) {
+			Student forPrint = studentList.get(i);
+			System.out.println("----------------------");
+			System.out.println("이름 : " + forPrint.getName());
+			System.out.println("학과 : " + forPrint.major);	
+			System.out.println("학번 : " + forPrint.IDcode);	
+			System.out.println("학점평균 : " + forPrint.credit);	
+			System.out.println("----------------------");
+		}
+	}
+	
+	public static void main(String[] args) {		
+		Problem05 problem = new Problem05();
+		problem.firstSet();
+	}
+}

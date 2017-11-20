@@ -1,0 +1,10 @@
+package chapter10_problems;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class Problem06 {	
+	static public void main(String [] args) {
+	}
+}

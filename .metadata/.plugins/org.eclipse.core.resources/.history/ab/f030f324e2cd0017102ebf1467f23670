@@ -1,0 +1,42 @@
+package chapter10_problems;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class Problem06 extends JFrame {
+	public Problem06() {
+		super("마우스 드래그");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		Container c = getContentPane(); //컨테이너 객체 선언
+		c.setLayout(null); //레이아웃이 필요없어 null
+		FontClickListener listener = new FontClickListener();
+		JLabel label = new JLabel();
+		c.add(label);
+		label.setText("C");
+		label.setLocation(100, 100);		
+		label.addMouseListener(listener);
+		
+		setSize(300,300);
+		setVisible(true);
+		//레이아웃 크기와 표시설정	
+		
+		label.setFocusable(true); // 레이블 포커스
+		label.requestFocus(); // 레이블 키 포커스	
+	}
+	
+	static public void main(String [] args) {
+		new Problem06();
+	}
+}
+
+class FontClickListener extends MouseAdapter {	
+	public void mouseReleased(MouseEvent e) {
+		Container newC = (Container)e.getSource();
+		Label setLabel = (Label)e.getSource();
+		int x = (int)(Math.random()*250);
+		int y = (int)(Math.random()*250);
+		setLabel.setLocation(x, y);
+	}
+}
+

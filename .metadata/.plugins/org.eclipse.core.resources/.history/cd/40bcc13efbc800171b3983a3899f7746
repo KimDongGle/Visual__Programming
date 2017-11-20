@@ -1,0 +1,101 @@
+package chapter07_problems;
+import java.util.*;
+
+class Location{
+	//값을 담을 변수들
+	String city;
+	String x;
+	String y;
+	
+	//생성자
+	public Location(String city, String x, String y) {
+		this.city = city;
+		this.x = x;
+		this.y = y;
+	}
+	
+	//set메소드 모음
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public void setX(String x) {
+		this.x = x;
+	}
+	public void setY(String y) {
+		this.y = y;
+	}
+
+	//get메소드 모음
+	public String getCity() {
+		return this.city;
+	}
+	public String getX() {
+		return this.x;
+	}
+	public String getY() {
+		return this.y;
+	}
+}
+
+
+
+public class Problem06 {
+	HashMap<String, Location> cityData = new HashMap<String, Location>();
+	Scanner scanner = new Scanner(System.in);
+	
+	public void firstSet() {
+		System.out.println("도시, 경도, 위도를 입력하세요(4개).");
+		for(int i = 0; i < 4; i++) {
+			System.out.print(">> ");
+			String input = scanner.nextLine();
+			StringTokenizer filter = new StringTokenizer(input, ",");
+			String city = filter.nextToken().trim();
+			String x = filter.nextToken().trim();
+			String y = filter.nextToken().trim();	
+			Location location = new Location(city, x, y);
+			//같은 패키지라 이전 Problem05에서 사용
+			cityData.put(city, location);
+		}
+	}
+	
+	//입력 받은 것을 프린트하는 메소드
+	public void printStudent() {
+		Set<String>key = cityData.keySet();	//헤쉬맵의 키를 담아옴
+		Iterator<String> it = key.iterator();	//키와 값을 담아줌
+		while(it.hasNext()) {
+			String cityName = it.next();
+			Location forPrint = cityData.get(cityName);
+			System.out.println("----------------------");
+			System.out.printf("%-5s", forPrint.getCity());
+			System.out.printf("%-20s", forPrint.getX());
+			System.out.printf("%-20s\n", forPrint.getY());
+		}
+		System.out.println("----------------------");
+	}
+	
+	//검색 메소드
+	public void search () {
+		while(true) {
+			System.out.print("학생 이름 >> ");
+			String check = scanner.nextLine();
+			check.trim();
+			if(check.equals("그만")) break; //입력 받고 '그만'인지 확인
+			Location getCity = cityData.get(check);
+			if(getCity == null) {
+				System.out.println(check + " 가 없습니다.");
+			}else {
+				System.out.printf("%0s", getCity.getCity());
+				System.out.printf("%5s", getCity.getX());
+				System.out.printf("%10s\n", getCity.getY());
+			}
+		}
+	}
+	
+	//메인문
+	public static void main(String[] args) {
+		Problem06 problem06 = new Problem06();
+		problem06.firstSet();
+		problem06.printStudent();
+		problem06.search();
+	}
+}
